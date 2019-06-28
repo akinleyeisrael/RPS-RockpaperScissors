@@ -4,18 +4,34 @@ namespace RockPaperScissors
 {
     class Program
     {
-        static void Main(string[] args)
+        public static string ConvertToString(int choice)
+        {
+            const string rock = "Rock";
+            const string paper = "Paper";
+            const string scissors = "scissors";
+
+            switch (choice)
+            {
+                case 1:
+                    return rock;
+                case 2:
+                    return paper;
+                default:
+                    return scissors;
+            }
+        }
+        public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to RockPaperScissors Game in C#");
 
-            Random rand = new Random();
-            int computer = rand.Next(1, 4);
+            var rand = new Random();
+            var computer = rand.Next(1, 4);
 
-            int play = 1;
+            var play = 1;
             while (play == 1)
             {
                 Console.WriteLine("Enter [1] for Rock, [2] for Paper, [3] for Scissors");
-                int playerChoice = Int32.Parse(Console.ReadLine());
+                var playerChoice = int.Parse(Console.ReadLine());
 
                 if (playerChoice >= 1 && playerChoice <= 3)
                 {
@@ -42,21 +58,20 @@ namespace RockPaperScissors
                 {
                     Console.WriteLine("Invalid Input,Pls enter values btw 1 and 3");
                 }
-            start:
+                start:
                 Console.WriteLine("Do you want to try again /n Enter yes or no");
-                string userInput = Console.ReadLine();
-                if (userInput == "yes")
+                var userInput = Console.ReadLine();
+                switch (userInput)
                 {
-                    play = 1;
-                }
-                else if (userInput == "no")
-                {
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input");
-                    goto start;
+                    case "yes":
+                        play = 1;
+                        break;
+                    case "no":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input");
+                        goto start;
                 }
             }
 
