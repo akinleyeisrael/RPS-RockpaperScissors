@@ -2,9 +2,9 @@
 
 namespace RockPaperScissors
 {
-    class Program
+    internal static class Program
     {
-        public static string ConvertToString(int choice)
+        private static string ConvertToString(int choice)
         {
             const string rock = "Rock";
             const string paper = "Paper";
@@ -20,6 +20,36 @@ namespace RockPaperScissors
                     return scissors;
             }
         }
+
+        private static void Print(int player, int computer)
+        {
+            if (player >= 1 && player <= 3)
+            {
+                Console.WriteLine($"Player:{ConvertToString(player)}");
+                Console.WriteLine($"computer:{ConvertToString(computer)}");
+
+                if (player != computer)
+                {
+                    if (player == 1 && computer == 3 || player == 2 && computer == 1 || player == 3 && computer == 2)
+                    {
+                        Console.WriteLine("YOU WIN");
+                    }
+                    else if (computer == 1 && player == 3 || computer == 2 && player == 1 || computer == 3 && player == 2)
+                    {
+                        Console.WriteLine("COMPUTER WINS");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("TIE");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input,Pls enter values btw 1 and 3");
+            }
+        }
+
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to RockPaperScissors Game in C#");
@@ -31,34 +61,11 @@ namespace RockPaperScissors
             while (play == 1)
             {
                 Console.WriteLine("Enter [1] for Rock, [2] for Paper, [3] for Scissors");
-                var playerChoice = int.Parse(Console.ReadLine());
+                var player = int.Parse(Console.ReadLine());
 
-                if (playerChoice >= 1 && playerChoice <= 3)
-                {
-                    Console.WriteLine($"player: {playerChoice}");
-                    Console.WriteLine($"computer: {computer}");
+                Print(player,computer);
 
-                    if (playerChoice != computer)
-                    {
-                        if (playerChoice == 1 && computer == 3 || playerChoice == 2 && computer == 1 || playerChoice == 3 && computer == 2)
-                        {
-                            Console.WriteLine("YOU WIN");
-                        }
-                        else if (computer == 1 && playerChoice == 3 || computer == 2 && playerChoice == 1 || computer == 3 && playerChoice == 2)
-                        {
-                            Console.WriteLine("COMPUTER WINS");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("TIE");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input,Pls enter values btw 1 and 3");
-                }
-                start:
+            start:
                 Console.WriteLine("Do you want to try again /n Enter yes or no");
                 var userInput = Console.ReadLine();
                 switch (userInput)
@@ -74,9 +81,6 @@ namespace RockPaperScissors
                         goto start;
                 }
             }
-
         }
-
     }
 }
-
